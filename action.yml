@@ -1,0 +1,39 @@
+name: 'Repo Filetree'
+
+description: 'Creates a simple filetree JSON file for a repository'
+
+inputs:
+  repo-owner:
+    description: 'The owner of the repository to use'
+    required: true
+    default: '???'
+  repo-name:
+    description: 'The name of the repository to use'
+    required: true
+    default: '???'
+  repo-commit:
+    description: 'The branch name to use, or the full sha1 string of a commit'
+    required: true
+    default: '???'
+  github-pat:
+    description: 'A Personal Access Token to use for fetching repository data'
+    required: true
+    default: '???'
+  output-path:
+    description: 'The path where the filetree file should be created'
+    required: true
+    default: 'FileTree.json'
+  prettify:
+    description: 'If the created JSON file should be in pretty format or not'
+    required: false
+    default: 'false'
+
+outputs:
+  success:
+    description: 'If creating the filetree was successful or not'
+  message:
+    description: 'A short message describing the status of the filetree'
+
+runs:
+  using: 'node16'
+  main: 'dist/index.js'

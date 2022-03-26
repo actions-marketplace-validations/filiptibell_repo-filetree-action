@@ -1,0 +1,18 @@
+{
+  "name": "repo-filetree-action",
+  "version": "1.0.0",
+  "description": "Creates a file tree file from a repository",
+  "main": "dist/index.js",
+  "keywords": [],
+  "author": "Filip Tibell",
+  "license": "MIT",
+  "dependencies": {
+    "@actions/core": "^1.6.0",
+    "@actions/io": "^1.1.1",
+    "axios": "^0.26.0",
+    "dotenv": "^16.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.21"
+  }
+}
