@@ -20,7 +20,6 @@ const fail = (statusCode, message) => {
 const getConfig = () => {
 	if (process.env.GITHUB_ACTIONS) {
 		return {
-			workDir: process.cwd(),
 			fromGHA: true,
 			repoOwner: core.getInput('repo-owner', { required: true }),
 			repoName: core.getInput('repo-name', { required: true }),
@@ -31,7 +30,6 @@ const getConfig = () => {
 		}
 	} else {
 		return {
-			workDir: process.cwd(),
 			fromGHA: false,
 			repoOwner: process.env.REPO_OWNER,
 			repoName: process.env.REPO_NAME,
@@ -217,16 +215,14 @@ const run = async (config) => {
 	const output = JSON.stringify(result.result, null, spacing);
 	console.log('')
 	// Make sure the directories for the
-	// output paths exist, otherwise create
+	// output path exists, otherwise create
 	if (config.outputPath.indexOf('/') !== -1) {
 		console.log('Writing directory...')
 		await ensureDirExists(config.outputPath);
 	}
-	// Write both files as serialized json, I don't
-	// know how to do this in parallel, but that
-	// might speed the action up some more
+	// Write the serialized json file to disk
 	console.log('Writing file...')
-	fs.writeFileSync(config.outputPath, output)
+	await fs.promises.writeFile(config.outputPath, output);
 	// Done!
 	return {
 		success: true,
